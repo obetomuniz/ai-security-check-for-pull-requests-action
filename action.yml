@@ -1,0 +1,8 @@
+name: "AI Security Check for Pull Request"
+description: "A GitHub Action that bring OpenAI to review PRs looking for potential security and privacy vulnerabilities."
+branding:
+  icon: "shield"
+  color: "blue"
+runs:
+  using: "node16"
+  main: "ai-security-check-for-pr.js"
