@@ -65,10 +65,6 @@ function readFiles(files) {
   return code
 }
 
-function base64Encode(str) {
-  return Buffer.from(str).toString("base64")
-}
-
 ;(async () => {
   try {
     const prFilesResponse = await GH_API.get(
@@ -79,11 +75,10 @@ function base64Encode(str) {
     const issues = await analyzeCode(code)
 
     if (issues) {
-      console.log(
-        base64Encode(`## Security and Privacy Suggestions\n\n${issues}`)
-      )
+      console.log(base64Encode(`Issues Found:`, issues))
+      process.env.PR_COMMENT = `## Security and Privacy Suggestions\n\n${issues}`
     } else {
-      console.log(base64Encode("No security or privacy issues found."))
+      console.log("No security or privacy issues found.")
     }
   } catch (error) {
     console.error("Error during code analysis:", error)
