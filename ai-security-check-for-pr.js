@@ -75,7 +75,7 @@ function readFiles(files) {
     const issues = await analyzeCode(code)
 
     if (issues) {
-      console.log(base64Encode(`Issues Found:`, issues))
+      console.log(`Issues Found:`, issues)
       process.env.PR_COMMENT = `## Security and Privacy Suggestions\n\n${issues}`
     } else {
       console.log("No security or privacy issues found.")
