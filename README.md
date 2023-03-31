@@ -44,8 +44,7 @@ jobs:
 
       - name: Finding security and privacy code vulnerabilities
         id: ai_security_check
-        run: |
-          echo "PR_COMMENT_BASE64=$(node ./ai-security-check-for-pr.js)" >> $GITHUB_OUTPUT
+        uses: obetomuniz/ai-security-check-for-pull-requests-action@v1.0.0
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPOSITORY: ${{ github.repository }}
@@ -55,12 +54,11 @@ jobs:
       - name: Comment on pull request
         uses: actions/github-script@v6
         env:
-          PR_COMMENT_BASE64: ${{ steps.ai_security_check.outputs.PR_COMMENT_BASE64 }}
+          PR_COMMENT: ${{ steps.ai_security_check.outputs.pr_comment }}
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const prCommentBase64 = process.env.PR_COMMENT_BASE64 || "";
-            const prComment = Buffer.from(prCommentBase64, "base64").toString("utf8") || "No security or privacy issues found.";
+            const prComment = process.env.PR_COMMENT || "No security or privacy issues found.";
             const { data } = await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
