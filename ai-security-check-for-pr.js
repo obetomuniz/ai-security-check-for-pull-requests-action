@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path")
+const core = require("@actions/core")
 const axios = require("axios")
 
 const OPEN_AI_MODEL = "gpt-3.5-turbo"
@@ -76,7 +77,10 @@ function readFiles(files) {
 
     if (issues) {
       console.log(`Issues Found:`, issues)
-      process.env.PR_COMMENT = `## Security and Privacy Suggestions\n\n${issues}`
+      core.setOutput(
+        "pr_comment",
+        `## Security and Privacy Suggestions\n\n${issues}`
+      )
     } else {
       console.log("No security or privacy issues found.")
     }

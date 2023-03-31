@@ -3,6 +3,9 @@ description: "A GitHub Action that bring OpenAI to review PRs looking for potent
 branding:
   icon: "shield"
   color: "blue"
+outputs:
+  pr_comment:
+    description: "The comment to be posted on the pull request"
 runs:
   using: "node16"
   main: "dist/index.js"
