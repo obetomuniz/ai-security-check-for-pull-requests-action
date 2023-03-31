@@ -5,4 +5,4 @@ branding:
   color: "blue"
 runs:
   using: "node16"
-  main: "ai-security-check-for-pr.js"
+  main: "dist/index.js"

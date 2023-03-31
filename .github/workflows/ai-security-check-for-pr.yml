@@ -24,7 +24,7 @@ jobs:
       - name: Analyze code
         id: ai_security_check
         run: |
-          echo "PR_COMMENT_BASE64=$(node ./ai-security-check-for-pr.js)" >> $GITHUB_OUTPUT
+          echo "PR_COMMENT_BASE64=$(node ./dist/index.js)" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPOSITORY: ${{ github.repository }}
