@@ -2,7 +2,7 @@
   "name": "ai-security-check-for-pr-action",
   "version": "1.0.0",
   "description": "",
-  "main": "./.github/workflows/ai-security-check-for-pr.js",
+  "main": "ai-security-check-for-pr.js",
   "keywords": [
     "openai",
     "github",
